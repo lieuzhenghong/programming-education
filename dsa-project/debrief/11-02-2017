@@ -1,0 +1,40 @@
+Date: 11th February 2017
+Tutors: Zheng Hong, Bailin
+Tutees: Gao Hong, Audrey, Gillian, Dylan
+
+Overview: First week of building the hardware device
+
+AAR: I was pleasantly surprised at the fact that everything went quite well. 
+Zhengyang's idea to buy the testing buttons was a good one, as we were able to
+test the Raspi.
+
+The kids didn't do anything today but they did learn about a couple of things:
+
+1. General overview of how the system works (Raspi connects to screen, buttons
+connect to Raspi, etc.) 
+2. Pins of the Raspi (cursory understanding of the
+different features; have yet to explain what is 5V, 3.3V, GND, GPIO etc.)
+3. What is a breadboard and how to work a breadboard
+4. How a button can send input into the Raspi (Need to explain python code that
+detects the thing that is pressed)
+
+We did the following things:
+1. Successfully set up the Raspi (SSH not working but we can use VNC)
+2. Cut holes in mounting board for buttons/knobs (Bailin did this)
+
+Things to do next session:
+1. Explain the GPIO pins: what is ground, GPIO, 5V, why connect to ground... 
+2. Mount and connect the proper buttons 
+3. 
+
+Need to research on:
+1. How to connect the 60mm buttons?
+2. ADC?
+3. Best way to mount the 7" touchscreen?
+
+Things to bring/buy next session:
+- Screwdriver
+- MTM jumper wires
+- 3 45mm buttons
+- ADC (when it arrives)
+
