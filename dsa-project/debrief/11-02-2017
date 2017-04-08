@@ -14,7 +14,8 @@ The kids didn't do anything today but they did learn about a couple of things:
 connect to Raspi, etc.) 
 2. Pins of the Raspi (cursory understanding of the
 different features; have yet to explain what is 5V, 3.3V, GND, GPIO etc.)
-3. What is a breadboard and how to work a breadboard
+3. What is a breadboard and how to work a breadboard (Zhengyang's youtube 
+video links were very helpful in this respect)
 4. How a button can send input into the Raspi (Need to explain python code that
 detects the thing that is pressed)
 
@@ -24,17 +25,18 @@ We did the following things:
 
 Things to do next session:
 1. Explain the GPIO pins: what is ground, GPIO, 5V, why connect to ground... 
-2. Mount and connect the proper buttons 
-3. 
+2. Mount and connect the proper 60mm/45mm buttons 
+3. Write code that translates the button inputs
 
-Need to research on:
+Need to research on/soliciting ideas for:
 1. How to connect the 60mm buttons?
 2. ADC?
 3. Best way to mount the 7" touchscreen?
+4. Any way to get SSH working?
 
 Things to bring/buy next session:
 - Screwdriver
 - MTM jumper wires
-- 3 45mm buttons
-- ADC (when it arrives)
+- 3 60mm/45mm buttons
+- ADC
 
