@@ -2,6 +2,7 @@ import turtle
 import math
 import time
 import sys
+import Adafruit_ADS1x15
 
 
 # Initialise the three objects
@@ -10,6 +11,12 @@ window = turtle.Screen()  # initialise the window
 ball = turtle.Turtle()
 paddle1 = turtle.Turtle() # do the same for the first paddle
 paddle2 = turtle.Turtle() # ... same for the second paddle
+adc = Adafruit_ADS1x15.ADS1015()
+
+
+values = [0,0]
+GAIN = 1
+
 
 window.setworldcoordinates(-400, -400, 400, 400) # set the coordinates of the window
 
@@ -42,6 +49,11 @@ velocity = [0.5,0]
 p1_energy = 5
 p2_energy = 5
 
+def p1_position(y):
+    paddle1.setpos(paddle1.pos()[0], y)
+def p2_position(y):
+    paddle2.setpos(paddle2.pos()[0], y)
+"""
 def p1_up():
     paddle1.setpos(paddle1.pos()[0], paddle1.pos()[1]+40)
 def p1_down():
@@ -50,6 +62,8 @@ def p2_up():
     paddle2.setpos(paddle2.pos()[0],paddle2.pos()[1]+40)
 def p2_down():
     paddle2.setpos(paddle2.pos()[0],paddle2.pos()[1]-40)
+"""    
+    
 def p1_shrinkpaddle():
     global p1_energy
     if p1_energy >= 1:
@@ -96,10 +110,10 @@ def p2_reverseball():
 
         
 window.listen() #listen for key being pressed
-window.onkey(p1_up, "w")
-window.onkey(p1_down,"s")
-window.onkey(p2_up, "Up")
-window.onkey(p2_down,"Down")
+#window.onkey(p1_up, "w")
+#window.onkey(p1_down,"s")
+#window.onkey(p2_up, "Up")
+#window.onkey(p2_down,"Down")
 window.onkey(p1_shrinkpaddle, "a")
 window.onkey(p2_shrinkpaddle, "Left") 
 window.onkey(p1_reverseball, "d")
@@ -116,6 +130,9 @@ s1.goto(0, 180)
 s1.write("{} : {}".format(p1_energy, p2_energy), False, 'center', font=('Laksaman', 24, 'bold'))
 s1.hideturtle()
 
+def scale(x):
+    return (x - 800)/2.05
+
 while True: # whatever in the loop keeps running
     p1_length = paddle1.shapesize()[0] * 15
     p2_length = paddle2.shapesize()[0] * 15
@@ -123,6 +140,12 @@ while True: # whatever in the loop keeps running
     btm1 = paddle1.pos()[1]- p1_length
     top2 = paddle2.pos()[1]+ p2_length
     btm2 = paddle2.pos()[1]- p2_length
+    
+    for i in range(2):
+        values[i] = adc.read_adc(i, gain=GAIN)
+    values = [scale(i) for i in values]
+    p1_position(values[0])
+    p2_position(values[1])
 
     if (ball.pos()[0] <= -400): # left edge of screen 
         ball.setpos(0,0)
