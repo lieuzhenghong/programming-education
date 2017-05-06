@@ -79,7 +79,8 @@ def draw_score():
     s1.goto(0, 200)
     # Write the score and energy
     s1.write("{} - {}".format(p1_score, p2_score), False, "center",
-             font=("Laksaman", 48, "bold")) s1.goto(0, 180)
+             font=("Laksaman", 48, "bold"))
+    s1.goto(0, 180)
     s1.write("{} : {}".format(p1_energy, p2_energy), False, 'center',
              font=('Laksaman', 24, 'bold'))
 
