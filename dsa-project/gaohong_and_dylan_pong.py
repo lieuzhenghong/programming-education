@@ -9,11 +9,6 @@ s1 = Turtle()# score 1
  
 window.setworldcoordinates(-400, -400, 400, 400) # define the size of the window
 window.tracer(False)
-# TODO
-# Now we have created the three turtles.
-# 1. Move the turtles into the correct position.
-# 2. change the shapes of the turtle. use turtle.shape('circle')
-#   and turtle.shape('square') for example
 p1.up()
 p2.up()
 ball.up()
@@ -38,7 +33,51 @@ s1.hideturtle()
 s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
 # We have successfully initialised the positions of the ball and paddles.
 # Now, we need to make the keys control the paddles.
+<<<<<<< HEAD:gaohong_and_dylan_pong.py
 
+=======
+def p1_left():
+    # Change from 0, 350 --> -10, 350
+    # p1.pos()  --> [30, 240] for example
+    # p1.pos()[0] --> 30
+    # p1.pos()[1] --> 240
+    x = p1.pos()[0]
+    y = p1.pos()[1]
+    #print(x)
+    # Change the position
+    if p1.pos()[0]<= -330:
+        pass
+    else:
+        p1.setpos(x-20,y)
+ 
+# Move player 1's paddle right 
+def p1_right():
+    x = p1.pos()[0]
+    y = p1.pos()[1]
+  
+    if p1.pos()[0]>= 330:
+        pass
+    else:
+        p1.setpos(x+20,y)
+ 
+def p2_left():
+    x = p2.pos()[0]
+    y = p2.pos()[1]
+    #print(x)
+    if p2.pos()[0]<= -330:
+        pass
+    else:
+        p2.setpos(x-20,y)
+ 
+def p2_right():
+    x = p2.pos()[0]
+    y = p2.pos()[1]
+    #print(x)
+    if p2.pos()[0]>= 330:
+        pass
+    else:
+        p2.setpos(x+20,y)
+>>>>>>> 2d5db36199b5be7e9bbf4fb2b3156bcd3cc8a7af:dsa-project/gaohong_and_dylan_pong.py
 
 v = [0.25, 0.15]
 
@@ -79,12 +118,15 @@ def move_ball():
         else:
             v[1] += -0.01
 
-    #bouncing off y-edge (Scoring)
+    # bouncing off y-edge (Scoring)
+    ##############
+
+    # 
     if (ball.pos()[1] > 400):
         #v = [v[0], v[1] * -1]
-        p2_scores += 1
+        p2_scores = p2_scores + 1
         ball.setpos(0,0)
-        s1.clear()
+        s1.clear() # Clear the scoreboard
         s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
         time.sleep(1)
 
@@ -96,6 +138,7 @@ def move_ball():
         s1.clear()
         s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
         time.sleep(1)
+    ###################
 
     #checking x edge
     if (ball.pos()[0] > 400):
@@ -160,9 +203,8 @@ window.onkey(p1_powerup,"f")
 window.onkey(p2_powerup,"l")
 
 
-while True:
+while True: # Runs forever
     move_ball()
-
     window.update()
 
 window.mainloop()
