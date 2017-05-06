@@ -11,6 +11,7 @@ window = turtle.Screen()  # initialise the window
 ball = turtle.Turtle()
 paddle1 = turtle.Turtle() # do the same for the first paddle
 paddle2 = turtle.Turtle() # ... same for the second paddle
+For the rpi
 adc = Adafruit_ADS1x15.ADS1015()
 
 

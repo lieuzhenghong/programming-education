@@ -1,11 +1,10 @@
 from turtle import *
 import time
 window = Screen()
-ball = Turtle() #create a turtle called ball
+ball = Turtle() # create a turtle called ball
 p1 =  Turtle() # do the same for the first paddle
 p2 = Turtle()# same here
-
-s1 = Turtle()
+s1 = Turtle()# score 1
 
  
 window.setworldcoordinates(-400, -400, 400, 400) # define the size of the window
@@ -34,13 +33,76 @@ ball.shapesize(1, 1)
 p1_scores = 0
 p2_scores = 0 
 
-p1_energy = 0
-p2_energy = 0
 s1.setpos(0,0)
 s1.hideturtle()
 s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
 # We have successfully initialised the positions of the ball and paddles.
 # Now, we need to make the keys control the paddles.
+
+
+v = [0.25, 0.15]
+
+def move_ball():
+
+    global v
+    global p1_scores
+    global p2_scores
+
+    ball.setpos(ball.pos()[0] +  v[0] , ball.pos()[1] + v[1])
+  
+    x = ball.pos()[0]
+    y = ball.pos()[1]
+    # Paddle 1
+    # if ball's y position > 325 and < 335 and ball's x position > p1's x position - 80 and ball's x position < p1's x position + 80
+    if ball.pos()[1] > 325 and ball.pos()[1]<335 and ball.pos()[0] > p1.pos()[0] - 80 and ball.pos()[0] < p1.pos()[0] + 80:
+        v = [v[0], v[1] * -1]
+        ball.setpos(x,325)
+        if v[0] > 0:
+            v[0] += 0.01
+        else:
+            v[0] += -0.01
+        if v[1]> 0:
+            v[1] += 0.01
+        else:
+            v[1] += -0.01
+    
+    # Paddle 2
+    if ball.pos()[1] < -325 and ball.pos()[1] > -335 and ball.pos()[0] > p2.pos()[0] - 80 and ball.pos()[0] < p2.pos()[0] + 80:
+        v = [v[0], v[1] * -1]
+        ball.setpos(x,-325)
+        if v[0] > 0:
+            v[0] += 0.01
+        else:
+            v[0] += -0.01
+        if v[1] > 0:
+            v[1] += 0.01
+        else:
+            v[1] += -0.01
+
+    #bouncing off y-edge (Scoring)
+    if (ball.pos()[1] > 400):
+        #v = [v[0], v[1] * -1]
+        p2_scores += 1
+        ball.setpos(0,0)
+        s1.clear()
+        s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
+        time.sleep(1)
+
+    if (ball.pos()[1] < -400):
+        # bounce the ball
+        #v = [v[0], v[1] * -1]
+        p1_scores += 1
+        ball.setpos(0,0)
+        s1.clear()
+        s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
+        time.sleep(1)
+
+    #checking x edge
+    if (ball.pos()[0] > 400):
+        v = [v[0] * -1 , v[1]]
+    if (ball.pos()[0] < -400):
+        v = [v[0] * -1, v[1]]
+
 def p1_left():
     # Change from 0, 350 --> -10, 350
     # p1.pos()  --> [30, 240] for example
@@ -83,71 +145,6 @@ def p2_right():
     else:
         p2.setpos(x+20,y)
 
-v = [0.25, 0.15]
- 
-def move_ball():
-
-    global v
-    global p1_scores
-    global p2_scores
-    global p1_energy
-    global p2_energy
-
-    ball.setpos(ball.pos()[0] +  v[0] , ball.pos()[1] + v[1])
-  
-    x = ball.pos()[0]
-    y = ball.pos()[1]
-    # Paddle 1
-    if ball.pos()[1] > 325 and ball.pos()[1]<335 and ball.pos()[0] > p1.pos()[0] - 80 and ball.pos()[0] < p1.pos()[0] + 80:
-        v = [v[0], v[1] * -1]
-        ball.setpos(x,325)
-        p1_energy += 1
-        if v[0] > 0:
-            v[0] += 0.01
-        else:
-            v[0] += -0.01
-        if v[1]> 0:
-            v[1] += 0.01
-        else:
-            v[1] += -0.01
-    
-    # Paddle 2
-    if ball.pos()[1] < -325 and ball.pos()[1] > -335 and ball.pos()[0] > p2.pos()[0] - 80 and ball.pos()[0] < p2.pos()[0] + 80:
-        v = [v[0], v[1] * -1]
-        ball.setpos(x,-325)
-        p2_energy += 1
-        if v[0] > 0:
-            v[0] += 0.01
-        else:
-            v[0] += -0.01
-        if v[1] > 0:
-            v[1] += 0.01
-        else:
-            v[1] += -0.01
-
-    #bouncing off y-edge (Scoring)
-    if (ball.pos()[1] > 400):
-        #v = [v[0], v[1] * -1]
-        p2_scores += 1
-        ball.setpos(0,0)
-        s1.clear()
-        s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
-        time.sleep(1)
-
-    if (ball.pos()[1] < -400):
-        # bounce the ball
-        #v = [v[0], v[1] * -1]
-        p1_scores += 1
-        ball.setpos(0,0)
-        s1.clear()
-        s1.write("{}-{}".format(p1_scores,p2_scores),False,font=("Arial",36))
-        time.sleep(1)
-
-    #checking x edge
-    if (ball.pos()[0] > 400):
-        v = [v[0] * -1 , v[1]]
-    if (ball.pos()[0] < -400):
-        v = [v[0] * -1, v[1]]
 
 def p1_powerup():
     print ('p1 power up used')
@@ -167,4 +164,5 @@ while True:
     move_ball()
 
     window.update()
+
 window.mainloop()
